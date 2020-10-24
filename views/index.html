@@ -1,0 +1,66 @@
+{{define "title"}}{{.Title}}{{end}}
+{{define "content"}}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron" style="min-height: 500px;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <img src="/static/img/notinaut.svg" class="w-100"/>
+                        </div>
+                        <div class="col-12 col-sm-6" style="color: #000000;">
+                            <h1>Notinaut</h1>
+                            <p>
+                                Hi! I am notinaut, a serial connected electronic device that says "Okay" when triggered. I am originally a keychain but thanks to John Pili, he changed
+                                me to become a web-based driven notifier. You can use me by clicking the button here or by sending an HTTP POST to /.
+                            </p>
+                            <div class="text-center pt-5">
+                                <button class="btn btn-primary" @click="onClick">Astronaut, say okay!</button>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>    
+</div>
+{{end}}
+{{define "scripts"}}
+<script type="text/javascript">
+    var sharedEvents = new Vue();
+    var app = new Vue({
+        el: "#root",
+        data: {            
+            o: null,                                
+        },
+        computed: {                      
+        },
+        methods:{            
+            onClick() {
+                try {                    
+                    var payload = {};
+                    var config = {};
+                    config.headers = {};
+                    axios.post('/', payload, config)
+                        .then(function (response) {                            
+                        }.bind(this))
+                        .catch(function (error) {                            
+                        }.bind(this));
+                }
+                catch (err) {
+                    console.error(err);
+                }                
+            }
+        },        
+        beforeMount() {                        
+            try {                                            
+            }
+            catch (err) {
+            }
+        },
+        mounted() {            
+        }
+    });
+</script>
+{{end}}

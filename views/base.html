@@ -1,0 +1,136 @@
+{{define "base"}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{block "title" .}}{{end}}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <link rel=”canonical” href="" />
+    <meta name="description" />    
+    <link rel="stylesheet" href="/static/vendors/bootstrap-4.4.1-dist/css/bootstrap.min.css" />    
+    <link rel="stylesheet" href="/static/vendors/fontawesome-free-5.11.2-web/css/all.css" />    
+    <link rel="stylesheet" href="/static/vendors/simple-lightbox/simple-lightbox.min.css" />    
+    <link rel="stylesheet" href="/static/css/site.css" />
+
+    <script src="/static/vendors/jquery/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="/static/vendors/jszip/jszip.min.js" type="text/javascript"></script>
+    <script src="/static/vendors/fezvrasta/popper.min.js" type="text/javascript"></script>
+    <script src="/static/vendors/jstree/jstree.min.js" type="text/javascript"></script>
+    
+    <script src="/static/vendors/axios/axios.min.js" type="text/javascript"></script>
+    <script src="/static/vendors/vue/vue.js" type="text/javascript"></script>
+    <script src="/static/vendors/bootstrap-4.4.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/vendors/moment/moment.min.js" type="text/javascript"></script>    
+    <script src="/static/vendors/malihu-custom-scrollbar-plugin-3.1.5/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+
+    <script src="/static/vendors/socket.io/2.3.1/socket.io.js"></script>    
+    <script src="/static/vendors/simple-lightbox/simple-lightbox.min.js"></script>
+    <script src="/static/vendors/simple-lightbox/simple-lightbox.jquery.min.js"></script>
+    <style>
+        .sl-overlay {
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 py-5">
+                    <main class="page-content text-white">
+                        {{block "content" .}}Have you seen the content writer?{{end}}
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <!-- #region START GENERATED ABOUT -->
+
+        <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog p-0" role="document">
+                <div class="modal-content p-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="aboutModalLabel">About</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-0 m-0">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 d-flex" style="height: 250px;">
+                                    <img src="/static/img/about.svg" class="mx-auto d-block align-self-center"
+                                             style="width: 70%"/>
+                                </div>
+                            </div>
+                            <div class="row pt-1">
+                                <div class="col-2">
+                                    <label>Product</label>
+                                </div>
+                                <div class="col-10">
+                                    <label>HTTP probe</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Author</label>
+                                </div>
+                                <div class="col-10">
+                                    <label>John Pili</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Version</label>
+                                </div>
+                                <div class="col-10">
+                                    <label>2020.1.0</label>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- endregion -->
+    </div>
+    <script>
+        $(document).ready(function () {            
+            /*var current = location.pathname;            
+            $('#nav li a').each(function(){
+                var $this = $(this);                    
+                if($this.attr('href').indexOf(current) !== -1){
+                    $this.addClass('active');
+                }
+            })*/            
+
+            $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+                if (!$(this).next().hasClass('show')) {
+                    $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+                }
+                var $subMenu = $(this).next(".dropdown-menu");
+                $subMenu.toggleClass('show');
+
+
+                $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                    $('.dropdown-submenu .show').removeClass("show");
+                });
+
+
+                return false;
+            });
+
+            var lightbox = $('.slb a').simpleLightbox({
+                overlay: true,
+            });
+        });
+    </script>    
+    {{block "scripts" .}}{{end}}
+</body>
+</html>
+{{end}}
